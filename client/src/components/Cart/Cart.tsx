@@ -5,7 +5,7 @@ import "./style.scss";
 import { useCartContext } from "../../context/CartContext";
 
 const Cart = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState<boolean>(false);
   const { cart, removeFromCart } = useCartContext();
 
   const handleClose = () => setShow(false);

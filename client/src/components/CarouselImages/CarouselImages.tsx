@@ -1,9 +1,9 @@
 import Carousel from "react-bootstrap/Carousel";
 import "./carouselImgStyle.scss";
 import { FC } from "react";
-import { CarouselImagesProps } from "./CarouselImgs";
+import { CarouselImagesProps, defaultImgSrcs } from "./CarouselImgs";
 
-const CarouselImages: FC<CarouselImagesProps> = ({ imgSrcs }) => {
+const CarouselImages: FC<CarouselImagesProps> = ({ imgSrcs = defaultImgSrcs}) => {
   return (
     <div className="images-carousel">
       <Carousel interval={1000}>
