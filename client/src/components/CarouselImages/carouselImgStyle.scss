@@ -1,0 +1,31 @@
+.images-carousel {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon,
+  .carousel-indicators {
+    display: none;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    aspect-ratio: 3/2;
+  }
+}
+
+@media (max-width: 1140px) {
+  .images-carousel {
+    width: 100%;
+
+    img {
+      object-fit: cover;
+      aspect-ratio: 2/1;
+      border-radius: 0px;
+    }
+  }
+}

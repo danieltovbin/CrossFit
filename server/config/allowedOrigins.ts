@@ -1,3 +1,3 @@
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['http://localhost:5174/'];
 
 export default allowedOrigins

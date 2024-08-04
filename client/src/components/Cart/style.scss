@@ -1,0 +1,41 @@
+.offcanvas-backdrop,
+::after,
+::before {
+  box-sizing: content-box !important;
+}
+
+.cart-container {
+  &__para {
+    text-align: center;
+  }
+
+  &__cart {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    margin: auto;
+    margin-bottom: 5px;
+
+    p,
+    h5 {
+      margin: auto;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      img {
+        width: 20px;
+        height: 30px;
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.navbar-dark,
+.navbar[data-bs-theme="dark"] {
+  background-color: black !important;
+  width: 100vw;
+}
+
+a.navbar-brand {
+  font-size: 35px;
+}
+
+.custom-header {
+  box-sizing: content-box !important;
+}
+
+.navbar > .container {
+  padding: 20px;
+}
+
+.social-media {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 20px;
+}
+
+.navbar-toggler {
+  border: none !important;
+
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none;
+  }
+}
