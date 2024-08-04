@@ -15,7 +15,9 @@ const ShopPage = () => {
 
   const fetchEquipments = async () => {
     try {
-      const response = await axios.get(`/api/equipments/get`);
+      const response = await axios.get(
+        `https://crossfit-server.onrender.com/api/equipments/get`
+      );
       setEquipments(response.data);
     } catch (error) {
       console.error("Error fetching equipments", error);
