@@ -1,3 +1,3 @@
-const allowedOrigins = ['http://localhost:5174/'];
+const allowedOrigins = ['https://crossfitpulsepro.onrender.com'];
 
 export default allowedOrigins
