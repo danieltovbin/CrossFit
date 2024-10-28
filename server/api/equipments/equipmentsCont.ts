@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Equipment } from "./equipmentsModel";
+import { CLOUDINARY_IMAGE_CONFIG, uploadImage } from "../../cloudinary/cloudinary";
 
 export const getAllEquipments = async (req:Request, res:Response) => {
     const equipments = await Equipment.find();
@@ -8,16 +9,22 @@ export const getAllEquipments = async (req:Request, res:Response) => {
 }
 
 export const createEquipment = async (req:Request, res:Response) => {
-    if (!req?.body?.name || !req?.body?.price || !req?.body?.imgUrl) {
+    const { name, price, imgUrl} = req.body;
+
+    if (!name || !price || !imgUrl) {
         return res.status(400).json( { 'message': 'Name, price and imgUrl are required'});
     }
 
     try {
+        const cloudinaryResult = await uploadImage(imgUrl, 'equipment', CLOUDINARY_IMAGE_CONFIG);
+        console.log("Cloudinary result:", cloudinaryResult);
+
         const result = await Equipment.create({
-            name: req.body.name,
-            price: req.body.price,
-            imgUrl: req.body.imgUrl
+            name,
+            price,
+            imgUrl: cloudinaryResult,
         });
+
         res.status(201).json(result);
     } catch (error) {
         console.error(error)
@@ -25,7 +32,9 @@ export const createEquipment = async (req:Request, res:Response) => {
 }
 
 export const updateEquipment = async (req:Request, res:Response) => {
-    if (!req?.body?.id) {
+    const { id, name, price, imgUrl } = req.body;
+
+    if (!id) {
         return res.status(400).json({ 'message': 'ID parameter is required.' });
     }
 
@@ -33,9 +42,19 @@ export const updateEquipment = async (req:Request, res:Response) => {
     if (!equipment) {
         return res.status(204).json({ "message": `No equipment matches ID ${req.body.id}.` });
     }
-    if (req.body?.name) equipment.name = req.body.name;
-    if (req.body?.price) equipment.price = req.body.price;
-    if (req.body?.imgUrl) equipment.imgUrl = req.body.imgUrl;
+    if (name) equipment.name = name;
+    if (price) equipment.price = price;
+    if (imgUrl) equipment.imgUrl = imgUrl;
+    if (imgUrl) {
+        try {
+            const cloudinaryResult = await uploadImage(imgUrl, 'equipment', CLOUDINARY_IMAGE_CONFIG);
+            equipment.imgUrl = cloudinaryResult;
+        } catch (error) {
+            console.error('Error uploading image to Cloudinary:', error);
+            return res.status(500).json({ message: 'Error uploading image to cloudinary', error: error.message});
+        }
+    }
+
     const result = await equipment.save();
     res.json(result);
 }

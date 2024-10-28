@@ -7,6 +7,7 @@ import connectDB from "./config/dbConn";
 import credentials from "./middleware/credentials";
 import pageNotFound from "./middleware/pageNotFound";
 import errorHandler from "./middleware/errorHandler";
+import { configureCloudinary } from "./config/configCloudinary";
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+configureCloudinary();
 
 import authRouter from './api/auth/authRouter'
 app.use("/api/auth", authRouter)
